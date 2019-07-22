@@ -15,16 +15,36 @@
 package net.ruixinglong.suntv;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.MediaController;
+import android.widget.VideoView;
+
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
+import com.shuyu.gsyvideoplayer.model.VideoOptionModel;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
+import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Main Activity class that loads {@link MainFragment}.
  */
 public class MainActivity extends Activity {
 
+    private StandardGSYVideoPlayer videoPlayer;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        List<VideoOptionModel> list = new ArrayList<>();
+        GSYVideoManager.instance().setOptionModelList(list);
+        String source1 = "rtsp://192.168.1.101/11";
+        videoPlayer.setUp(source1, true, "");
+        videoPlayer.getTitleTextView().setVisibility(View.GONE);
+        videoPlayer.startPlayLogic();
     }
 }
